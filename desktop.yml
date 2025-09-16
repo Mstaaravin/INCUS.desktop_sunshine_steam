@@ -1,0 +1,90 @@
+#cloud-config
+timezone: America/Argentina/Buenos_Aires
+
+chpasswd:
+  list: |
+    root:pass123
+    cmiranda:pass123
+  expire: false
+
+users:
+  - name: cmiranda
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmWoYmXFKdbDYqhTzxgAEyfXNuihMf8FpGlBN5uxF40 cmiranda@ed25519
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    groups: sudo
+    shell: /bin/bash
+
+packages:
+  - aptitude
+  - wget
+  - rsync
+  - curl
+  - tmux
+  - vim
+  - nano
+  - sudo
+  - less
+  - apt-transport-https
+  - ca-certificates
+  - openssh-server
+  - tasksel
+  - net-tools
+  - xrdp
+  - xorgxrdp
+  - task-xfce-desktop
+  - gnome-brave-icon-theme
+  - lightdm
+  - dbus-x11
+  - xvfb
+  - x11-xserver-utils
+  - mesa-utils
+  - xauth
+
+write_files:
+  - path: /etc/xrdp/startwm.sh
+    content: |
+      #!/bin/sh
+      # xrdp X session start script (c) 2015, 2017, 2021 mirabilos
+      # published under The MirOS Licence
+
+      # Rely on /etc/pam.d/xrdp-sesman using pam_env to load both
+      # /etc/environment and /etc/default/locale to initialise the
+      # locale and the user environment properly.
+
+      if test -r /etc/profile; then
+               ./etc/profile
+      fi
+
+      if test -r ~/.profile; then
+                . ~/.profile
+      fi
+
+      unset DBUS_SESSION_BUS_ADDRESS
+      unset XDG_RUNTIME_DIR
+        . $HOME/.profile
+
+      test -x /etc/X11/Xsession && exec /etc/X11/Xsession
+      exec /bin/sh /etc/X11/Xsession
+    owner: root:root
+    permissions: '0755'
+
+
+runcmd:
+  - sleep 15
+  - sysctl -p /etc/sysctl.d/99-disable-ipv6.conf
+  - sed -i 's/main contrib/main contrib non-free non-free-firmware/g' /etc/apt/sources.list
+  - dpkg --add-architecture i386
+  - apt update
+  - DEBIAN_FRONTEND=noninteractive apt install -y nvidia-driver nvidia-modprobe nvidia-kernel-dkms nvidia-settings xserver-xorg-video-nvidia
+  - sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashrc
+  - sed -i 's/\\\[\\033\[01;32m\\\]/\\\[\\033[01;36m\\\]/' /etc/skel/.bashrc
+  - cat /etc/skel/.bashrc > /root/.bashrc
+  - cat /etc/skel/.bashrc > /home/cmiranda/.bashrc
+  - apt install -y libc6:amd64 libc6:i386 libegl1:amd64 libegl1:i386 libgbm1:amd64 libgbm1:i386 libgl1-mesa-dri:amd64 libgl1-mesa-dri:i386 libgl1:amd64 libgl1:i386 steam-libs-amd64:amd64 libgl1-nvidia-glvnd-glx:i386
+  - wget -O /tmp/steam_latest.deb https://repo.steampowered.com/steam/archive/precise/steam_latest.deb
+  - apt install -y /tmp/steam_latest.deb
+  # Download and execute Sunshine setup script
+  - wget -O /root/sunshine.sh http://ip.lan/sunshine-complete.sh
+  - chmod +x /root/sunshine.sh
+  - /root/sunshine.sh
