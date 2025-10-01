@@ -23,7 +23,7 @@ Automated server setup for game streaming using **Sunshine** + **XFCE** + **Stea
 
 ## 📺 Demo Videos
 
-**Quick Demo** (Spanish narration): https://studio.youtube.com/video/0wCxjrJudIA  
+**Quick Demo** (Spanish narration): https://www.youtube.com/watch?v=0wCxjrJudIA
 **Full Deploy Tutorial** (includes Incus setup): https://www.youtube.com/watch?v=ZVPf2jnbcGI
 
 *Note: Audio quality may not be professional-grade due to budget microphones*
