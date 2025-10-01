@@ -32,7 +32,7 @@ Automated server setup for game streaming using **Sunshine** + **XFCE** + **Stea
 
 
 **Quick Demo showing how works**
-[![Fast demo of running a complete Linux Desktop + Sunshine inside an Incus container.](https://i9.ytimg.com/vi_webp/0wCxjrJudIA/maxresdefault.webp?v=68dc7731&sqp=CLTu8cYG&rs=AOn4CLDdz_LyqP498ww_2ZxIXixL9gk7MA)](https://www.youtube.com/watch?v=0wCxjrJudIA)
+[![Fast demo of running a complete Linux Desktop + Sunshine inside an Incus container.](https://i9.ytimg.com/vi_webp/0wCxjrJudIA/maxresdefault.webp?v=68dc7c42&sqp=COT38cYG&rs=AOn4CLAlRzlHPRwu8nvOfafdcfOwLvR9MQ)](https://www.youtube.com/watch?v=0wCxjrJudIA)
 
 
 
