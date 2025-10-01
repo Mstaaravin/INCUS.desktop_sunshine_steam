@@ -21,12 +21,20 @@ Automated server setup for game streaming using **Sunshine** + **XFCE** + **Stea
 - **NVIDIA drivers** - GPU acceleration
 - **XRDP** - Remote access (optional)
 
-## 📺 Demo Videos
+## 📺 Demo Videos (Spanish narration)
 
-**Quick Demo** (Spanish narration): https://www.youtube.com/watch?v=0wCxjrJudIA
-**Full Deploy Tutorial** (includes Incus setup): https://www.youtube.com/watch?v=ZVPf2jnbcGI
+> [!NOTE]
+> Audio quality may not be professional-grade due to cheap microphone
 
-*Note: Audio quality may not be professional-grade due to budget microphones*
+
+**Full Deploy Tutorial** (includes Incus setup):
+[![How to deploy a Linux Desktop with Incus + Sunshine + Steam](https://i9.ytimg.com/vi/ZVPf2jnbcGI/maxresdefault.jpg?v=68c8c71d&sqp=CLTu8cYG&rs=AOn4CLB6KwYFBHLvT2TCA8ZeUc0Ey1iFsA)](https://www.youtube.com/watch?v=ZVPf2jnbcGI)
+
+
+**Quick Demo showing how works**
+[![Fast demo of running a complete Linux Desktop + Sunshine inside an Incus container.](https://i9.ytimg.com/vi_webp/0wCxjrJudIA/maxresdefault.webp?v=68dc7731&sqp=CLTu8cYG&rs=AOn4CLDdz_LyqP498ww_2ZxIXixL9gk7MA)](https://www.youtube.com/watch?v=0wCxjrJudIA)
+
+
 
 ## 🚀 Quick Deploy
 
