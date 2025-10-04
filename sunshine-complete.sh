@@ -5,7 +5,8 @@ set -e
 
 USER_NAME="cmiranda"
 USER_HOME="/home/$USER_NAME"
-SUNSHINE_DEB="https://github.com/LizardByte/Sunshine/releases/download/v0.21.0/sunshine-debian-bookworm-amd64.deb"
+SUNSHINE_DEB="https://github.com/LizardByte/Sunshine/releases/download/v2025.924.154138/sunshine-debian-trixie-amd64.deb"
+#SUNSHINE_DEB="https://github.com/LizardByte/Sunshine/releases/download/v0.21.0/sunshine-debian-bookworm-amd64.deb"
 DISPLAY_NUMBER="99"
 
 echo "Setting up Sunshine with Xvfb for user $USER_NAME..."
@@ -81,28 +82,43 @@ EOF
 echo "Creating Sunshine configuration..."
 cat > "$USER_HOME/.config/sunshine/sunshine.conf" << EOF
 # Sunshine configuration
+# https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
 capture = x11
-display_number = $DISPLAY_NUMBER
+# display_number = $DISPLAY_NUMBER
+# output_name = 0
+# adapter_name = /dev/dri/card0
 adapter_name = /dev/dri/renderD128
+
+
+# Input settings
+gamepad = x360
+input = uinput
+mouse = enabled
+keyboard = enabled
+
+high_resolution_scrolling = enabled
 
 # Encoder settings
 encoder = nvenc
-nv_preset = llhq
-nv_rc = vbr
+nvenc_preset = 1
+nvenc_twopass = quarter_res
 
 # Fallback to software if NVENC fails
 sw_preset = ultrafast
 
 # Audio settings
-audio_sink = null
+audio_sink = alsa_output.pci-0000_01_00.1.hdmi-stereo
 
 # Network settings
-origin_web_ui_allowed = pc
+origin_web_ui_allowed = wan
 upnp = on
+# address_family = ipv4
 port = 47989
+lan_encryption_mode = 0
+wan_encryption_mode = 0
 
 # Logging
-min_log_level = info
+min_log_level = debug
 EOF
 
 # Create apps.json configuration file
