@@ -32,7 +32,7 @@ packages:
   - net-tools
   - xrdp
   - xorgxrdp
-  - task-xfce-desktop
+  - task-mate-desktop
   - gnome-brave-icon-theme
   - lightdm
   - dbus-x11
@@ -81,9 +81,9 @@ runcmd:
   - sed -i 's/\\\[\\033\[01;32m\\\]/\\\[\\033[01;36m\\\]/' /etc/skel/.bashrc
   - cat /etc/skel/.bashrc > /root/.bashrc
   - cat /etc/skel/.bashrc > /home/cmiranda/.bashrc
-  - apt install -y libc6:amd64 libc6:i386 libegl1:amd64 libegl1:i386 libgbm1:amd64 libgbm1:i386 libgl1-mesa-dri:amd64 libgl1-mesa-dri:i386 libgl1:amd64 libgl1:i386 steam-libs-amd64:amd64 libgl1-nvidia-glvnd-glx:i386
   - wget -O /tmp/steam_latest.deb https://repo.steampowered.com/steam/archive/precise/steam_latest.deb
   - apt install -y /tmp/steam_latest.deb
+  - apt install -y libc6:amd64 libc6:i386 libegl1:amd64 libegl1:i386 libgbm1:amd64 libgbm1:i386 libgl1-mesa-dri:amd64 libgl1-mesa-dri:i386 libgl1:amd64 libgl1:i386 steam-libs-amd64:amd64 libgl1-nvidia-glvnd-glx:i386
   # Download and execute Sunshine setup script
   - wget -O /root/sunshine.sh http://ip.lan/sunshine-complete.sh
   - chmod +x /root/sunshine.sh
