@@ -84,19 +84,17 @@ cat > "$USER_HOME/.config/sunshine/sunshine.conf" << EOF
 # Sunshine configuration
 # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
 capture = x11
-# display_number = $DISPLAY_NUMBER
+display_number = $DISPLAY_NUMBER
 # output_name = 0
 # adapter_name = /dev/dri/card0
 adapter_name = /dev/dri/renderD128
 
 
 # Input settings
-gamepad = x360
-input = uinput
-mouse = enabled
-keyboard = enabled
+#mouse = enabled
+#keyboard = enabled
 
-high_resolution_scrolling = enabled
+#high_resolution_scrolling = enabled
 
 # Encoder settings
 encoder = nvenc
@@ -136,14 +134,9 @@ cat > "$USER_HOME/.config/sunshine/apps.json" << EOF
       "image-path": "desktop.png"
     },
     {
-      "name": "Low Res Desktop",
-      "detached": true,
-      "image-path": "sunshine.png",
-      "cmd": [
-        "xrandr",
-        "--output", "XWAYLAND0",
-        "--mode", "1024x768"
-      ]
+      "name": "XFCE Desktop",
+      "detached": ["dbus-run-session -- xfce4-session"],
+      "image-path": "desktop.png"
     },
     {
       "name": "Steam Big Picture",
@@ -218,6 +211,8 @@ systemctl enable sunshine.service
 echo "Starting Xvfb service..."
 systemctl start xvfb.service
 sleep 3
+systemctl start sunshine.service
+sleep 3
 
 # Verify Xvfb is running
 echo "Verifying Xvfb..."
@@ -225,6 +220,17 @@ if DISPLAY=:$DISPLAY_NUMBER xdpyinfo &>/dev/null; then
     echo "✓ Xvfb is running successfully on display :$DISPLAY_NUMBER"
 else
     echo "⚠ Xvfb verification failed. Check: systemctl status xvfb"
+fi
+
+# Verify Sunshine is running
+echo "Verifying Sunshine..."
+if systemctl is-active --quiet sunshine; then
+    echo "✓ Sunshine is running successfully"
+    # Show relevant startup logs
+    journalctl -u sunshine -n 20 --no-pager | grep -E "Found.*encoder|Screencasting" || echo "Check logs with: journalctl -u sunshine -n 50"
+else
+    echo "⚠ Sunshine failed to start. Check: systemctl status sunshine"
+    journalctl -u sunshine -n 30 --no-pager
 fi
 
 # Test OpenGL (may fail in containers, that's ok)

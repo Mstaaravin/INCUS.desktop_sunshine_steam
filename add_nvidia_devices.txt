@@ -1,0 +1,14 @@
+export CONTAINER_NAME=steam01
+
+# incus create images:debian/13/cloud $CONTAINER_NAME -c boot.autostart=false -c security.privileged=true -c security.nesting=true --config=user.user-data="$(cat desktop.yml)"
+incus create images:debian/13/cloud $CONTAINER_NAME -c boot.autostart=false -c security.syscalls.intercept.mknod=true -c security.syscalls.intercept.setxattr=true -c nvidia.runtime=true -c limits.memory=16GiB -c security.idmap.size=200000 --config=user.user-data="$(cat cmiranda.yml)"
+
+incus config device add $CONTAINER_NAME nvidia-gpu gpu pci=0000:01:00.0 gputype=physical
+incus config device add $CONTAINER_NAME dri-card0 unix-char path=/dev/dri/card0 mode=0666
+incus config device add $CONTAINER_NAME dri-renderD128 unix-char path=/dev/dri/renderD128 mode=0666
+incus config device add $CONTAINER_NAME uinput unix-char path=/dev/uinput gid=995 mode=0666
+#incus config device add $CONTAINER_NAME nvidia0 unix-char path=/dev/nvidia0
+#incus config device add $CONTAINER_NAME nvidiactl unix-char path=/dev/nvidiactl
+#incus config device add $CONTAINER_NAME nvidia-modeset unix-char path=/dev/nvidia-modeset
+
+incus start $CONTAINER_NAME
