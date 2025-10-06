@@ -1,6 +1,14 @@
-# Sunshine Game Streaming Server Setup
+# Sunshine Game Streaming Server Setup inside an Incus container
 
 Automated server setup for game streaming using **Sunshine** + **XFCE** + **Steam** in LXC/Incus containers with NVIDIA GPU support.
+
+
+> [!IMPORTANT]
+> AT SEPTEMBER/OCTOBER 2025
+> NOT WORKING, IN DEBIAN 13 HOST + GUEST MOUSE DON'T WORK
+> IN DEBIAN 13 HOST + DEBIAN 12 GUEST WORKS BUT NOT GPU BECAUSE SUNSHINE USE SOFTWARE ENCODER INSTEAD NVENVC (GPU) EVEN WITH FULL GPU SUPPORTED IN OS
+> PROBABLY IN A VM WITH FULL GPU PASSTHROUGH WILL WORKS PERFECT BUT I DONT HAVE A SETUP FOR TESTING NOW.
+
 
 ## 📑 Table of Contents
 
